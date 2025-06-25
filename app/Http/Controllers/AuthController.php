@@ -44,6 +44,7 @@ class AuthController extends Controller
             'tanggal_lahir' => 'required',
             'gender' => 'required',
             'email' => 'required|email|unique:users',
+            'phone' => 'required',
             'password' => 'required',
             'photo' => 'nullable',
         ]);
@@ -52,7 +53,15 @@ class AuthController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $user = User::create($request->all());
+        $user = User::create([
+            'nama' => '-',
+            'tanggal_lahir' => '-',
+            'gender' => '-',
+            'email' => '-',
+            'phone' => $request->phone,
+            'password' => $request->password,
+            'photo' => '-',
+        ]);
         return response()->json([
             'status' => 200,
             'user' => $user,
