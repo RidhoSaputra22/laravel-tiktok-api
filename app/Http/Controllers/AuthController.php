@@ -52,7 +52,7 @@ class AuthController extends Controller
 
         $user = User::create([
             'nama' => '-',
-            'tanggal_lahir' => '-',
+            'tanggal_lahir' => now(),
             'gender' => '-',
             'email' => '-',
             'phone' => $request->phone,
